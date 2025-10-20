@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Royal Enfield Service Centre</title>
+  <meta name="description" content="Premium Royal Enfield service centre — tuneups, restorations, accessories & more." />
+  <style>
+    /* Reset & base */
+    :root{
+      --accent:#b22222; /* deep red */
+      --muted:#f5f5f5;
+      --dark:#111;
+      --card-bg:rgba(255,255,255,0.06);
+      --glass: rgba(255,255,255,0.06);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;color:#fff;background:linear-gradient(180deg,#0b0b0f 0%, #131316 100%);}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+
+    /* Header */
+    header{position:sticky;top:0;z-index:40;background:linear-gradient(180deg, rgba(11,11,11,0.6), rgba(11,11,11,0.35));backdrop-filter: blur(6px);padding:14px 18px;display:flex;align-items:center;justify-content:space-between}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:46px;height:46px;border-radius:8px;display:grid;place-items:center;background:var(--accent);font-weight:700;box-shadow:0 6px 18px rgba(178,34,34,0.18)}
+    nav{display:flex;gap:18px;align-items:center}
+    nav a{padding:8px 12px;border-radius:8px;transition:all .22s}
+    nav a:hover{transform:translateY(-3px);background:rgba(255,255,255,0.03)}
+
+    /* hamburger for mobile */
+    .hamburger{display:none;flex-direction:column;gap:4px;cursor:pointer}
+    .hamburger span{width:22px;height:2px;background:#fff;border-radius:2px}
+
+    /* Hero */
+    .hero{min-height:72vh;display:grid;grid-template-columns:1fr 480px;gap:28px;padding:48px;align-items:center}
+    .hero-left{max-width:720px}
+    .eyebrow{display:inline-block;background:rgba(255,255,255,0.04);padding:8px 12px;border-radius:999px;margin-bottom:18px;font-weight:600;color:var(--muted)}
+    h1{font-size:clamp(28px,4.2vw,48px);line-height:1.02;margin:6px 0}
+    p.lead{color:#d0d0d8;max-width:56ch}
+    .cta-row{display:flex;gap:12px;margin-top:22px}
+    .btn{background:var(--accent);padding:12px 18px;border-radius:10px;font-weight:700;box-shadow:0 8px 24px rgba(178,34,34,0.16);cursor:pointer}
+    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.08)}
+
+    /* hero-right card */
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));padding:18px;border-radius:14px;box-shadow:0 10px 40px rgba(0,0,0,0.6)}
+    .media{height:360px;border-radius:10px;overflow:hidden;position:relative}
+    .slide{position:absolute;inset:0;background-size:cover;background-position:center;transition:opacity .8s ease;opacity:0}
+    .slide.active{opacity:1}
+    .service-list{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+    .service-item{background:rgba(255,255,255,0.02);padding:10px;border-radius:8px;font-weight:600}
+
+    /* sections */
+    main{padding:36px}
+    .grid{display:grid;gap:18px}
+    .services{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+    .service-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:20px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);transform:translateY(10px);opacity:0;transition:all .6s cubic-bezier(.2,.9,.2,1)}
+    .service-card.visible{transform:none;opacity:1}
+    .service-card h3{margin:6px 0}
+    .features{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px}
+    .chip{padding:8px 10px;border-radius:999px;background:rgba(255,255,255,0.03);font-size:13px}
+
+    /* Gallery */
+    .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+    .gallery img{width:100%;height:160px;object-fit:cover;border-radius:8px;filter:saturate(.9) contrast(.95);transition:transform .45s cubic-bezier(.2,.9,.2,1)}
+    .gallery img:hover{transform:scale(1.05)}
+
+    /* footer */
+    footer{padding:28px;background:linear-gradient(180deg, rgba(0,0,0,0.12), rgba(0,0,0,0.06));border-top:1px solid rgba(255,255,255,0.02);display:flex;justify-content:space-between;align-items:center}
+
+    /* responsive */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr;min-height:64vh;padding:28px}
+      .hero-right{order:2}
+      nav{display:none}
+      .hamburger{display:flex}
+      .gallery{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:520px){
+      .gallery{grid-template-columns:1fr}
+      .media{height:240px}
+      .hero{padding:18px}
+      .card{padding:12px}
+    }
+
+    /* animations */
+    @keyframes floaty{0%{transform:translateY(0)}50%{transform:translateY(-8px)}100%{transform:translateY(0)}}
+    .logo{animation:floaty 6s ease-in-out infinite}
+
+    /* smooth reveal for hero text */
+    .reveal{opacity:0;transform:translateY(18px);transition:all .7s cubic-bezier(.2,.9,.2,1)}
+    .reveal.visible{opacity:1;transform:none}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo">RE</div>
+      <div>
+        <div style="font-weight:800">Royal Enfield Service</div>
+        <small style="color:#bdbdbd">Heritage care. Modern tech.</small>
+      </div>
+    </div>
+
+    <nav aria-label="Main navigation">
+      <a href="#services">Services</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Contact</a>
+      <a class="btn" href="#contact">Book Now</a>
+    </nav>
+
+    <div class="hamburger" id="hamburger" aria-hidden="true">
+      <span></span><span></span><span></span>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-left">
+      <div class="eyebrow">Authorized Service Centre</div>
+      <h1 class="reveal">Premium care for your Royal Enfield — tune-ups, restorations, custom & performance.</h1>
+      <p class="lead reveal">We combine classic craftsmanship with modern diagnostics to keep your bike running like new. Fast turnaround, genuine parts, expert technicians.</p>
+      <div class="cta-row reveal">
+        <button class="btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Book Service</button>
+        <button class="btn ghost" onclick="document.getElementById('gallery').scrollIntoView({behavior:'smooth'})">View Gallery</button>
+      </div>
+
+      <div style="margin-top:26px;display:flex;gap:12px;flex-wrap:wrap">
+        <div style="background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:12px;border-radius:8px;min-width:140px">
+          <div style="font-size:24px;font-weight:800">12k+</div>
+          <div style="color:#cfcfd6">Services delivered</div>
+        </div>
+        <div style="background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:12px;border-radius:8px;min-width:140px">
+          <div style="font-size:24px;font-weight:800">99%</div>
+          <div style="color:#cfcfd6">Customer satisfaction</div>
+        </div>
+      </div>
+    </div>
+
+    <aside class="hero-right card" aria-hidden="false">
+      <div class="media" id="media">
+        <!-- slides populated by JS using Unsplash images -->
+        <div class="slide active" style="background-image:url('https://source.unsplash.com/1200x800/?royal-enfield,classic')" aria-hidden="true"></div>
+        <div class="slide" style="background-image:url('https://source.unsplash.com/1200x800/?royal-enfield,bike')" aria-hidden="true"></div>
+        <div class="slide" style="background-image:url('https://source.unsplash.com/1200x800/?royal-enfield,bullet')" aria-hidden="true"></div>
+      </div>
+
+      <div class="service-list">
+        <div class="service-item">Express Service</div>
+        <div class="service-item">Engine Diagnostics</div>
+        <div class="service-item">Classic Restorations</div>
+        <div class="service-item">Custom Mods</div>
+      </div>
+    </aside>
+  </section>
+
+  <main>
+    <section id="services" style="margin-top:6px">
+      <h2 style="margin:6px 0">Our Services</h2>
+      <p style="color:#cfcfd6">From quick oil changes to full restorations — everything your Royal Enfield needs under one roof.</p>
+
+      <div class="grid services" style="margin-top:18px">
+        <article class="service-card reveal">
+          <h3>Scheduled Maintenance</h3>
+          <p>Manufacturer-recommended checkups, fluid changes, and safety inspections.</p>
+          <div class="features"><span class="chip">Genuine parts</span><span class="chip">Warranty</span></div>
+        </article>
+
+        <article class="service-card reveal">
+          <h3>Engine & Transmission</h3>
+          <p>Full diagnostics, tuning, and rebuilds performed by experienced techs.</p>
+          <div class="features"><span class="chip">Dyno tuning</span><span class="chip">Performance</span></div>
+        </article>
+
+        <article class="service-card reveal">
+          <h3>Restoration</h3>
+          <p>Classic model restoration with attention to original details and finishes.</p>
+          <div class="features"><span class="chip">Sourcing parts</span><span class="chip">Paint</span></div>
+        </article>
+
+        <article class="service-card reveal">
+          <h3>Custom & Accessories</h3>
+          <p>Personalize your ride — ergonomics, luggage, crash protection and more.</p>
+          <div class="features"><span class="chip">Seats</span><span class="chip">Exhaust</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="gallery" style="margin-top:36px">
+      <h2>Gallery</h2>
+      <p style="color:#cfcfd6">A few of the bikes we've serviced and restored.</p>
+      <div class="gallery" style="margin-top:14px">
+        <img src="https://source.unsplash.com/800x600/?royal-enfield,road" alt="Royal Enfield on a road">
+        <img src="https://source.unsplash.com/800x600/?royal-enfield,classic" alt="Royal Enfield classic">
+        <img src="https://source.unsplash.com/800x600/?royal-enfield,bike" alt="Royal Enfield bike">
+        <img src="https://source.unsplash.com/800x600/?royal-enfield,sunset" alt="Royal Enfield at sunset">
+        <img src="https://source.unsplash.com/800x600/?royal-enfield,maintenance" alt="Bike maintenance">
+        <img src="https://source.unsplash.com/800x600/?royal-enfield,workshop" alt="Workshop">
+      </div>
+    </section>
+
+    <section id="contact" style="margin-top:36px">
+      <h2>Contact & Bookings</h2>
+      <div style="display:grid;grid-template-columns:1fr 380px;gap:18px;margin-top:12px">
+        <form class="card" style="padding:16px;" onsubmit="event.preventDefault();submitForm()">
+          <label style="display:block;margin-bottom:8px">Name<input id="name" required style="width:100%;padding:10px;margin-top:6px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit"></label>
+          <label style="display:block;margin-bottom:8px">Phone<input id="phone" required style="width:100%;padding:10px;margin-top:6px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit"></label>
+          <label style="display:block;margin-bottom:8px">Model & Service<select id="service" style="width:100%;padding:10px;margin-top:6px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit">
+            <option>Scheduled Maintenance</option>
+            <option>Engine Work</option>
+            <option>Restoration</option>
+            <option>Custom Work</option>
+          </select></label>
+          <label style="display:block;margin-bottom:8px">Preferred Date<input id="date" type="date" style="width:100%;padding:10px;margin-top:6px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit"></label>
+          <div style="display:flex;gap:10px;margin-top:12px"><button class="btn" type="submit">Request Booking</button><button class="btn ghost" type="button" onclick="this.closest('form').reset()">Reset</button></div>
+        </form>
+
+        <aside class="card" style="padding:18px">
+          <h3>Visit Us</h3>
+          <p style="color:#d0d0d8">123 Heritage Lane, MotorCity — Open Mon-Sat 9:00 — 18:00</p>
+          <p style="margin-top:12px">Phone: <a href="tel:+911234567890">+91 12345 67890</a></p>
+          <p style="margin-top:12px">We use genuine parts and provide a written report for every job.</p>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div>© <span id="year"></span> Royal Enfield Service Centre</div>
+    <div style="opacity:.8">Built with ❤️ · Images: Unsplash</div>
+  </footer>
+
+  <script>
+    // small helper: on-scroll reveal
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting) e.target.classList.add('visible')
+      })
+    },{threshold:0.15})
+    document.querySelectorAll('.reveal').forEach(n=>observer.observe(n))
+    document.querySelectorAll('.service-card').forEach(n=>observer.observe(n))
+
+    // hero slideshow
+    const slides = Array.from(document.querySelectorAll('.slide'))
+    let idx = 0
+    setInterval(()=>{
+      slides[idx].classList.remove('active')
+      idx = (idx+1) % slides.length
+      slides[idx].classList.add('active')
+    },4000)
+
+    // hamburger toggle
+    const hamburger = document.getElementById('hamburger')
+    hamburger.addEventListener('click',()=>{
+      const nav = document.querySelector('nav')
+      if(nav.style.display === 'flex') nav.style.display = 'none'
+      else nav.style.display = 'flex'
+    })
+
+    // booking stub
+    function submitForm(){
+      const name = document.getElementById('name').value || 'Rider'
+      const service = document.getElementById('service').value
+      alert(`${name}, thanks! We've received your request for: ${service}. We'll call to confirm.`)
+      document.querySelector('form').reset()
+    }
+
+    // year
+    document.getElementById('year').textContent = new Date().getFullYear()
+  </script>
+</body>
+</html>
